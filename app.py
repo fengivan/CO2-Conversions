@@ -98,7 +98,7 @@ with col2:
 data = {
     'Parameter': ['Temperature', 'Pressure', 'CO2', 'H2S', 'CH4', 'C2H6'],
     'Value': [temperature, pressure, co2_percent, h2s_percent, ch4_percent, c2h6_percent],
-    'Unit': ['°F', 'psia', '', '', '', '']
+    'Unit': ['°F', 'psia', 'mole fraction', 'mole fraction', 'mole fraction', 'mole fraction']
 }
 
 # Convert dictionary to DataFrame
