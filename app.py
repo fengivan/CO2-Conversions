@@ -122,7 +122,7 @@ df2 = pd.DataFrame(data)
 st.write("### Summary of Inputs:")
 st.dataframe(df2)
 
-st.write("Phase: "+str(1000*PropsSI("Phase", 'T', (temperature+459.67)/1.8, 'P',pressure*6894.76, mixture)))
+st.write("Phase: "+str(PropsSI("Phase", 'T', (temperature+459.67)/1.8, 'P',pressure*6894.76, mixture)))
 
 st.write("Density (g/L): "+str(PropsSI('D', 'T', (temperature+459.67)/1.8, 'P',pressure*6894.76, mixture)))
 st.write("Viscosity (cP): "+str(1000*PropsSI("VISCOSITY", 'T', (temperature+459.67)/1.8, 'P',pressure*6894.76, mixture)))
