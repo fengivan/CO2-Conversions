@@ -127,9 +127,16 @@ st.dataframe(df2)
 st.write("Density (g/L): "+str(PropsSI('D', 'T', (temperature+459.67)/1.8, 'P',pressure*6894.76, mixture)))
 st.write("Viscosity (cP): "+str(1000*PropsSI("VISCOSITY", 'T', (temperature+459.67)/1.8, 'P',pressure*6894.76, mixture)))
 
-st.write("Gas FVF: (v/v)" +str(PropsSI('D', 'T', (temperature+459.67)/1.8, 'P',pressure*6894.76, mixture)/PropsSI('D', 'T', (60+459.67)/1.8, 'P',14.65*6894.76, mixture)))
+
+fvf=PropsSI('D', 'T', (temperature+459.67)/1.8, 'P',pressure*6894.76, mixture)/PropsSI('D', 'T', (60+459.67)/1.8, 'P',14.65*6894.76, mixture)
+st.write("Gas FVF (v/v): " +str(fvf))
     
-st.write('Eq CO2: (MT/BCF):' + str(PropsSI('D', 'T', (temperature+459.67)/1.8, 'P',pressure*6894.76, 'CO2[1]')/PropsSI('D', 'T', (temperature+459.67)/1.8, 'P',pressure*6894.76, mixture)/PropsSI('D', 'T', (60+459.67)/1.8, 'P',14.65*6894.76, mixture)))
+
+den = PropsSI('D', 'T', (temperature+459.67)/1.8, 'P',pressure*6894.76, 'CO2[1]')
+
+
+st.write('Eq CO2: (Metric Ton/BCF):' +str(den/fvf/.0000353))
+st.write(den)
 
 st.divider()########################################################################################################################################################################
 st.header('References')
