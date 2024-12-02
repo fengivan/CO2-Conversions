@@ -121,7 +121,9 @@ df2 = pd.DataFrame(data)
 # Display the DataFrame using Streamlit
 st.write("### Summary of Inputs:")
 st.dataframe(df2)
-st.write(total_gas_percent*100)
+
+st.write("Phase: "+str(1000*PropsSI("Phase", 'T', (temperature+459.67)/1.8, 'P',pressure*6894.76, mixture)))
+
 st.write("Density (g/L): "+str(PropsSI('D', 'T', (temperature+459.67)/1.8, 'P',pressure*6894.76, mixture)))
 st.write("Viscosity (cP): "+str(1000*PropsSI("VISCOSITY", 'T', (temperature+459.67)/1.8, 'P',pressure*6894.76, mixture)))
 
