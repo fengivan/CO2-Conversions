@@ -95,13 +95,20 @@ with col2:
     ch4_percent = st.number_input("CH4 (%)", min_value=0.0, max_value=100.0, value=0.0)/100
     c2h6_percent = st.number_input("C2H6 (%)", min_value=0.0, max_value=100.0, value=0.0)/100
 
+data = {
+    'Parameter': ['Temperature', 'Pressure', 'CO2', 'H2S', 'CH4', 'C2H6'],
+    'Value': [temperature, pressure, co2_percent, h2s_percent, ch4_percent, c2h6_percent],
+    'Unit': ['°F', 'psia', '', '', '', '']
+}
+
+# Convert dictionary to DataFrame
+df2 = pd.DataFrame(data)
+
+# Display the DataFrame using Streamlit
 st.write("### Summary of Inputs:")
-st.write(f"- Temperature: {temperature} °F")
-st.write(f"- Pressure: {pressure} psia")
-st.write(f"- CO2: {co2_percent} ")
-st.write(f"- H2S: {h2s_percent} ")
-st.write(f"- CH4: {ch4_percent} ")
-st.write(f"- C2H46: {c2h6_percent} ")
+st.dataframe(df2)
+
+
 mixture = "CO2[1]"
 mixture = "Methane["+str(ch4_percent)+"]&CO2["+str(co2_percent)+"]&H2S["+str(h2s_percent)+"]&ethane["+str(c2h6_percent)+"]"
 
