@@ -6,10 +6,8 @@ from CoolProp.CoolProp import PropsSI
 
 st.set_page_config(page_title="CO2 Properties", layout="wide")
 
-
-st.title("CO2 Unit Converter")
 st.divider()
-st.header("Pure CO2")
+st.header("Pure CO2 Unit Converter")
 data = {
     "Temp Base (F)": [70, 70, 60, 60],
     "Pressure Base (psia)": [14.65, 14.73, 14.65, 14.73],
