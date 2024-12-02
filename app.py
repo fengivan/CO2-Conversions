@@ -95,18 +95,9 @@ with col2:
     ch4_percent = st.number_input("CH4 (%)", min_value=0.0, max_value=100.0, value=0.0)/100
     c2h6_percent = st.number_input("C2H6 (%)", min_value=0.0, max_value=100.0, value=0.0)/100
 
-data = {
-    'Parameter': ['Temperature', 'Pressure', 'CO2', 'H2S', 'CH4', 'C2H6'],
-    'Value': [temperature, pressure, co2_percent, h2s_percent, ch4_percent, c2h6_percent],
-    'Unit': ['°F', 'psia', 'mole fraction', 'mole fraction', 'mole fraction', 'mole fraction']
-}
+total_gas_percent = co2_percent + h2s_percent + ch4_percent+c2h6_percent
 
-# Convert dictionary to DataFrame
-df2 = pd.DataFrame(data)
 
-# Display the DataFrame using Streamlit
-st.write("### Summary of Inputs:")
-st.dataframe(df2)
 
 
 mixture = "CO2[1]"
@@ -114,9 +105,27 @@ mixture = "Methane["+str(ch4_percent)+"]&CO2["+str(co2_percent)+"]&H2S["+str(h2s
 
 
 
-total_gas_percent = co2_percent + h2s_percent + ch4_percent+c2h6_percent
+
 if total_gas_percent == 1:
     st.success("Inputs look good!")
+    co2_percent=co2_percent/total_gas_percent
+    h2s_percent=h2s_percent/total_gas_percent
+    ch4_percent=ch4_percent/total_gas_percent
+    c2h6_percent=c2h6_percent/total_gas_percent
+    total_gas_percent = co2_percent + h2s_percent + ch4_percent+c2h6_percent
+    data = {
+        'Parameter': ['Temperature', 'Pressure', 'CO2', 'H2S', 'CH4', 'C2H6'],
+        'Value': [temperature, pressure, co2_percent, h2s_percent, ch4_percent, c2h6_percent],
+        'Unit': ['°F', 'psia', 'mole fraction', 'mole fraction', 'mole fraction', 'mole fraction']
+    }
+
+    # Convert dictionary to DataFrame
+    df2 = pd.DataFrame(data)
+
+    # Display the DataFrame using Streamlit
+    st.write("### Summary of Inputs:")
+    st.dataframe(df2)
+
     st.write("Density (g/L): "+str(PropsSI('D', 'T', (temperature+459.67)/1.8, 'P',pressure*6894.76, mixture)))
     st.write("Viscosity (cP): "+str(1000*PropsSI("VISCOSITY", 'T', (temperature+459.67)/1.8, 'P',pressure*6894.76, mixture)))
 
