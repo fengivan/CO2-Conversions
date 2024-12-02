@@ -152,3 +152,5 @@ Bell, I. H., Wronski, J., Quoilin, S., & Lemort, V. (2014). *Pure and Pseudo-pur
 """)
 
 st.write("http://www.coolprop.org/index.html")
+
+st.write("NIST Carbon Dioxide Properties: https://webbook.nist.gov/cgi/cbook.cgi?ID=C124389")
