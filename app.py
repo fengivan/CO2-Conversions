@@ -3,7 +3,7 @@ import pandas as pd
 import sys
 import streamlit as st
 from CoolProp.CoolProp import PropsSI
-
+import math
 st.set_page_config(page_title="CO2 Properties", layout="wide")
 
 st.divider()
@@ -21,9 +21,8 @@ df['MT/MMcf']= df["CO2 Density (g/L)"] *.0283168466*1000
 
 
 
-pressure_col1, pressure_col2, _ = st.columns([1, 1, 4]) 
-with pressure_col1:
-    pressure_base = st.selectbox("Select Gas Pressure Base:", ["14.65 psi, 60F (RRC)", "14.65 psi, 70F", "14.73 psi, 60F", "14.73 psi, 70F"], index=0)
+
+pressure_base = st.selectbox("Select Gas Pressure Base:", ["14.65 psi, 60F (RRC)", "14.65 psi, 70F", "14.73 psi, 60F", "14.73 psi, 70F"], index=0)
 
 
 parts = pressure_base.split(", ") 
@@ -33,7 +32,7 @@ temp = float(parts[1].split("F")[0])
 factor = df[(df['Temp Base (F)'] == temp) & (df['Pressure Base (psia)'] == pressure)]['MT/MMcf'].iloc[0]
 
 
-col1, col2, _ = st.columns([1, 1, 6]) 
+col1, col2 = st.columns([1, 1]) 
 
 with col1:
     co2_value_input = st.text_input("Input:", value="100000") 
@@ -80,16 +79,16 @@ st.divider()####################################################################
 st.header("Compositional Properties")
 
 
-col1, col2, col3, col4, col5, col6= st.columns(6)
+col1, col2= st.columns(2)
 
 with col1:
-    st.header("Temperature and Pressure")
+    st.write("Temperature and Pressure")
     temperature = st.number_input("Temperature (°F)", min_value=32.0, max_value=1000.0, value=80.0)
     pressure = st.number_input("Pressure (psia)", min_value=1.0, max_value=20000.0, value=1000.0)
 
 
 with col2:
-    st.header("Gas Composition (Mole Fraction)")
+    st.write("Gas Composition (Mole Fraction)")
     co2 = st.number_input("CO2", min_value=0.0, max_value=100000.0, value=100.0)
     h2s = st.number_input("H2S", min_value=0.0, max_value=100000.0, value=0.0)
     ch4 = st.number_input("CH4", min_value=0.0, max_value=100000.0, value=0.0)
@@ -122,15 +121,21 @@ df2 = pd.DataFrame(data)
 st.write("### Summary of Inputs:")
 st.dataframe(df2)
 
+st.header("Results")
 #st.write("Phase: "+str(PropsSI("Phase", 'T', (temperature+459.67)/1.8, 'P',pressure*6894.76, mixture)))
 
 st.write("Density (g/L): "+str(PropsSI('D', 'T', (temperature+459.67)/1.8, 'P',pressure*6894.76, mixture)))
+st.write("Density (Metric Ton/BBL): "+str(PropsSI('D', 'T', (temperature+459.67)/1.8, 'P',pressure*6894.76, mixture)*1.59*10**-4))
+st.write("Density (lb/gallon): "+str(PropsSI('D', 'T', (temperature+459.67)/1.8, 'P',pressure*6894.76, mixture)*.008345))
+
+
+
+
 st.write("Viscosity (cP): "+str(1000*PropsSI("VISCOSITY", 'T', (temperature+459.67)/1.8, 'P',pressure*6894.76, mixture)))
 
 
 fvf=PropsSI('D', 'T', (temperature+459.67)/1.8, 'P',pressure*6894.76, mixture)/PropsSI('D', 'T', (60+459.67)/1.8, 'P',14.65*6894.76, mixture)
 st.write("Gas FVF (v/v): " +str(fvf))
-    
 
 den = PropsSI('D', 'T', (temperature+459.67)/1.8, 'P',pressure*6894.76, 'CO2[1]')
 
@@ -139,8 +144,14 @@ st.write('Eq CO2: (Metric Ton/BCF):' +str(den/fvf/.0000353))
 st.write(den)
 
 st.divider()########################################################################################################################################################################
+
+
+
+
+
+st.divider()########################################################################################################################################################################
 st.header('References')
-st.write("RRC Gas Production Reporting: https://www.rrc.texas.gov/media/mxcpw5vn/form-pr-instructions-01-25-2022.pdf")
+st.write("RRC Gas Production Reporting Instructions: https://www.rrc.texas.gov/media/mxcpw5vn/form-pr-instructions-01-25-2022.pdf")
 st.dataframe(df)
 
 
@@ -152,5 +163,5 @@ Bell, I. H., Wronski, J., Quoilin, S., & Lemort, V. (2014). *Pure and Pseudo-pur
 """)
 
 st.write("http://www.coolprop.org/index.html")
-
+st.write(" ")
 st.write("NIST Carbon Dioxide Properties: https://webbook.nist.gov/cgi/cbook.cgi?ID=C124389")
