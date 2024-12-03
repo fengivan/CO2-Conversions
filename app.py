@@ -4,7 +4,7 @@ import sys
 import streamlit as st
 from CoolProp.CoolProp import PropsSI
 import math
-st.set_page_config(page_title="CO2 Properties", layout="wide")
+st.set_page_config(page_title="CO2 Properties", layout="centered")
 
 st.divider()
 st.header("Pure CO2 Unit Converter")
