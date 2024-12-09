@@ -79,47 +79,48 @@ st.divider()####################################################################
 st.header("Compositional Properties")
 
 
-col1, col2= st.columns(2)
 
-with col1:
-    st.write("Temperature and Pressure")
-    temperature = st.number_input("Temperature (°F)", min_value=32.0, max_value=1000.0, value=80.0)
-    pressure = st.number_input("Pressure (psia)", min_value=1.0, max_value=20000.0, value=1000.0)
+
+st.write("**Temperature and Pressure**")
+temperature = st.number_input("Temperature (°F)", min_value=32.0, max_value=1000.0, value=80.0)
+pressure = st.number_input("Pressure (psia)", min_value=1.0, max_value=20000.0, value=1000.0)
+col2, col3= st.columns(2)
 
 
 with col2:
-    st.write("Gas Composition (Mole Fraction)")
+    st.write("**Gas Composition (Mole Fraction)**")
     co2 = st.number_input("CO2", min_value=0.0, max_value=100000.0, value=100.0)
     h2s = st.number_input("H2S", min_value=0.0, max_value=100000.0, value=0.0)
     ch4 = st.number_input("CH4", min_value=0.0, max_value=100000.0, value=0.0)
     c2h6 = st.number_input("C2H6", min_value=0.0, max_value=100000.0, value=0.0)
+    n2 = st.number_input("N2", min_value=0.0, max_value=100000.0, value=0.0)
 
-    total_gas= co2+ h2s + ch4 + c2h6
+    total_gas= co2+ h2s + ch4 + c2h6+n2
     co2_percent=co2/total_gas
     h2s_percent=h2s/total_gas
     ch4_percent=ch4/total_gas
     c2h6_percent=c2h6/total_gas
-
-
+    n2_percent = n2/total_gas
 
 mixture = "CO2[1]"
-mixture = "Methane["+str(ch4_percent)+"]&CO2["+str(co2_percent)+"]&H2S["+str(h2s_percent)+"]&ethane["+str(c2h6_percent)+"]"
+mixture = "Methane["+str(ch4_percent)+"]&CO2["+str(co2_percent)+"]&H2S["+str(h2s_percent)+"]&ethane["+str(c2h6_percent)+"]&N2["+str(n2_percent)+"]"
 
 
 
-total_gas_percent = co2_percent + h2s_percent + ch4_percent+c2h6_percent
+total_gas_percent = co2_percent + h2s_percent + ch4_percent+c2h6_percent+n2_percent
 data = {
-    'Parameter': ['Temperature', 'Pressure', 'CO2', 'H2S', 'CH4', 'C2H6'],
-    'Value': [temperature, pressure, co2_percent, h2s_percent, ch4_percent, c2h6_percent],
-    'Unit': ['°F', 'psia', 'mole fraction', 'mole fraction', 'mole fraction', 'mole fraction']
+    'Parameter': ['Temperature', 'Pressure', 'CO2', 'H2S', 'CH4', 'C2H6', 'N2'],
+    'Value': [temperature, pressure, co2_percent, h2s_percent, ch4_percent, c2h6_percent, n2_percent],
+    'Unit': ['°F', 'psia', 'mole fraction', 'mole fraction', 'mole fraction', 'mole fraction', 'mole fraction']
 }
 
 # Convert dictionary to DataFrame
 df2 = pd.DataFrame(data)
 
 # Display the DataFrame using Streamlit
-st.write("### Summary of Inputs:")
-st.dataframe(df2)
+with col3:
+    st.write("**Summary of Inputs:**")
+    st.dataframe(df2)
 
 st.header("Results")
 #st.write("Phase: "+str(PropsSI("Phase", 'T', (temperature+459.67)/1.8, 'P',pressure*6894.76, mixture)))
