@@ -53,22 +53,22 @@ if co2_value is not None:
 
 if unit =='Metric Tons/year':
     summary_data = {
-    'Units                        ': ['12-Year Total Metric Tons', 'Metric Tons/year', 'MCFD', 'bbls/day (1,000 psig, 80F)'],
+    'Units                        ': ['12-Year Total Metric Tons', 'Metric Tons/year', 'MCFD', 'bbls/day (1,400 psig, 80F)'],
     'Value                        ': [
         round(co2_value*12,1),
         co2_value, 
         round(co2_value/365/factor*1000,1), 
-        round(co2_value*.0242665,1) 
+        round(co2_value*.0215761,1) 
     ]
     }
 elif unit =='MCFD':
     summary_data = {
-    'Units                       ': ['12-Year Total Metric Tons', 'Metric Tons/year', 'MCFD', 'bbls/day (1,000 psig, 80F)'],
+    'Units                       ': ['12-Year Total Metric Tons', 'Metric Tons/year', 'MCFD', 'bbls/day (1,400 psig, 80F)'],
     'Value                       ': [
         round(co2_value*365*factor/1000*12,1),
         round(co2_value*365*factor/1000,1),  
         co2_value,
-        round(co2_value*365*factor/1000*.0242665,1) 
+        round(co2_value*365*factor/1000*.0215761,1) 
     ]
     }
 
@@ -83,7 +83,7 @@ st.header("Compositional Properties")
 
 st.write("**Temperature and Pressure**")
 temperature = st.number_input("Temperature (°F)", min_value=32.0, max_value=1000.0, value=80.0)
-pressure = st.number_input("Pressure (psia)", min_value=1.0, max_value=20000.0, value=1000.0)
+pressure = st.number_input("Pressure (psia)", min_value=1.0, max_value=20000.0, value=1400.0)
 col2, col3= st.columns(2)
 
 
