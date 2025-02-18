@@ -22,7 +22,7 @@ df['MT/MMcf']= df["CO2 Density (g/L)"] *.0283168466*1000
 
 
 
-pressure_base = st.selectbox("Select Gas Pressure Base:", ["14.65 psi, 60F (RRC)", "14.65 psi, 70F", "14.696 psi, 60F", "14.696 psi, 70F", "14.73 psi, 60F", "14.73 psi, 70F"], index=0)
+pressure_base = st.selectbox("Select Gas Pressure Base:", ["14.65 psi, 60F (RRC)", "14.65 psi, 70F", "14.696 psi, 60F", "14.696 psi, 70F", "14.73 psi, 60F", "14.73 psi, 70F", '16.7 psi, 58F (new)'], index=0)
 
 
 parts = pressure_base.split(", ") 
