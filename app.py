@@ -49,7 +49,9 @@ with col2:
 # Display user input if valid
 if co2_value is not None:
     st.write("Selected pressure base:", pressure_base)
+    st.write("Conversion Factor:", factor)
     st.write("Selected Input:", co2_value, unit)
+    
 
 if unit =='Metric Tons/year':
     summary_data = {
