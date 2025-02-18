@@ -9,8 +9,8 @@ st.set_page_config(page_title="CO2 Properties", layout="centered")
 st.divider()
 st.header("Pure CO2 Unit Converter")
 data = {
-    "Temp Base (F)": [70, 70,70,70, 60, 60,60,60],
-    "Pressure Base (psia)": [14.65, 14.696,14.7,14.73, 14.65, 14.696,14.7,14.73],
+    "Temp Base (F)": [70, 70,70,70, 60, 60,60,60,59],
+    "Pressure Base (psia)": [14.65, 14.696,14.7,14.73, 14.65, 14.696,14.7,14.73,14.7],
     #"CO2 Density (g/L)": [1.8265, 1.8365, 1.8623, 1.8725],
     #"MT/MMcf": [51.7210005, 52.0041705, 52.7347491, 53.0235825],
 }
@@ -142,6 +142,10 @@ den = PropsSI('D', 'T', (temperature+459.67)/1.8, 'P',pressure*6894.76, 'CO2[1]'
 
 
 st.write('Eq CO2: (Metric Ton/BCF):' +str(den/fvf/.0000353))
+
+
+air = PropsSI('D', 'T', (temperature+459.67)/1.8, 'P',pressure*6894.76, 'CO2[1]')
+
 st.write(den)
 
 st.divider()########################################################################################################################################################################
