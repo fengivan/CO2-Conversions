@@ -10,7 +10,7 @@ st.divider()
 st.header("Pure CO2 Unit Converter")
 data = {
     "Temp Base (F)": [70, 70,70,70, 60, 60,60,60,59],
-    "Pressure Base (psia)": [14.65, 14.696,14.7,14.73, 14.65, 14.696,14.7,14.73,14.696],
+    "Pressure Base (psia)": [14.65, 14.696,14.7,14.73, 14.65, 14.696,14.7,14.73,14.7],
     #"CO2 Density (g/L)": [1.8265, 1.8365, 1.8623, 1.8725],
     #"MT/MMcf": [51.7210005, 52.0041705, 52.7347491, 53.0235825],
 }
@@ -22,7 +22,7 @@ df['MT/MMcf']= df["CO2 Density (g/L)"] *.0283168466*1000
 
 
 
-pressure_base = st.selectbox("Select Gas Pressure Base:", ["14.65 psi, 60F (RRC)", "14.65 psi, 70F", "14.696 psi, 60F", "14.696 psi, 70F", "14.73 psi, 60F", "14.73 psi, 70F", "14.696 psi, 59F (new)"], index=0)
+pressure_base = st.selectbox("Select Gas Pressure Base:", ["14.65 psi, 60F (RRC)", "14.65 psi, 70F", "14.696 psi, 60F", "14.696 psi, 70F", "14.73 psi, 60F", "14.73 psi, 70F", "14.7 psi, 59F (new)"], index=0)
 
 
 parts = pressure_base.split(", ") 
