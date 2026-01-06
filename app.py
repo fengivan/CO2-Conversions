@@ -140,6 +140,10 @@ st.write("Density (lb/gallon): "+str(PropsSI('D', 'T', (temperature+459.67)/1.8,
 st.write("Viscosity (cP): "+str(1000*PropsSI("VISCOSITY", 'T', (temperature+459.67)/1.8, 'P',pressure*6894.76, mixture)))
 
 
+Cp = PropsSI("Cpmass", 'T', T_K, 'P', P_Pa, mixture)
+st.write("Heat Capacity Cp (J/kg-K): " + str(Cp))
+
+
 fvf=PropsSI('D', 'T', (temperature+459.67)/1.8, 'P',pressure*6894.76, mixture)/PropsSI('D', 'T', (60+459.67)/1.8, 'P',14.65*6894.76, mixture)
 st.write("Gas FVF (v/v): " +str(fvf))
 
